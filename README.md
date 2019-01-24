@@ -8,3 +8,5 @@ Please write comments with any code that is not blatantly obvious. If you're not
 Keep code clean and readable. Don't sacrifice readablity for complexity or efficency.
 
 ## TODO
+
+Working on enumeration today --James
