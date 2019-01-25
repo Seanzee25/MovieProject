@@ -77,6 +77,15 @@ public class movieObject {
 	public Date getReleaseDate() {
 		return releaseDate;
 	}
+	
+	public String getGoodReleaseDate() {
+		return goodDate.format(releaseDate);
+	}
+	
+	public String getGoodReceiveDate() {
+		return goodDate.format(receiveDate);
+	}
+	
 	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
 	}
@@ -110,7 +119,7 @@ public class movieObject {
 		movie += "\nDescription: " + description;
 		// After being parsed during our objects instantiation our date is ready to be presented thanks SimpleDateFormat.
 		movie += "\nRecieve Date: " + goodDate.format(receiveDate);
-		movie += "Release Date: " + goodDate.format(releaseDate);
+		movie += "\nRelease Date: " + goodDate.format(releaseDate);
 		movie += "\nStatus: " + status;
 		movie += "\n";
 		return movie;
