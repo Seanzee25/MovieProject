@@ -1,3 +1,5 @@
+package Movie;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -103,14 +105,14 @@ public class movieObject {
 	
 	public String toString() {
 		// Printing of the object in clean format.
-		String movie;
-		// After being parsed during our objects instantiation our date is ready to be presented thanks SimpleDateFormat.
-		movie = "Release Date: " + goodDate.format(releaseDate);
-		movie += "\nName: " + name;
+		String movie = "";
+		movie += "Name: " + name;
 		movie += "\nDescription: " + description;
+		// After being parsed during our objects instantiation our date is ready to be presented thanks SimpleDateFormat.
 		movie += "\nRecieve Date: " + goodDate.format(receiveDate);
+		movie += "Release Date: " + goodDate.format(releaseDate);
 		movie += "\nStatus: " + status;
+		movie += "\n";
 		return movie;
 	}
 }
-
