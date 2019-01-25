@@ -1,8 +1,10 @@
 package Movie;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -127,6 +129,48 @@ public class textHandler {
 		}
 		
 		return importedMovies;
+		
+	}
+	
+	public static void textWriter(ArrayList<movieObject> moviesToSave) {
+		
+		// The name of the file to open.
+        String writeFile = "src/Text/Movielist.txt";
+        
+        // Movie information
+        String title = "";
+		String description = "";
+		String releaseDate = "";
+		String receiveDate = "";
+		
+		// "Iterator"
+		int indexTracker;
+
+        try {
+            // Assume default encoding.
+            FileWriter fileWriter = new FileWriter(writeFile);
+
+            // Always wrap FileWriter in BufferedWriter.
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            for (indexTracker = 0; indexTracker < moviesToSave.size(); indexTracker++) {
+            	
+            	title = moviesToSave.get(indexTracker).getName();
+            	description = moviesToSave.get(indexTracker).getDescription();
+            	releaseDate = moviesToSave.get(indexTracker).getGoodReleaseDate();
+            	receiveDate = moviesToSave.get(indexTracker).getGoodReceiveDate();
+            	
+            	bufferedWriter.write(title + "|" + description + "|" + releaseDate + "|" + receiveDate + "|");
+            	bufferedWriter.newLine();
+            
+            }
+
+            // Always close files.
+            bufferedWriter.close();
+        }
+        catch(IOException ex) {
+            ex.printStackTrace();
+        }
 		
 	}
 
