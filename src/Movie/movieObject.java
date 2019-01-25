@@ -2,17 +2,31 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/*******************************************
+** Based on code from Thomas Hopkins fork **
+********************************************
+
 public class movieObject {
 	
+	/*************************************************************************************************************
+	** Thanks to https://examples.javacodegeeks.com/core-java/util/date/java-util-date-example-how-to-use-date/ **
+	** for the Date() examples!										    **
+	*************************************************************************************************************/
+	
+	// Setup new Date() format (SimpleDateFormat) for String calls.
 	private SimpleDateFormat goodDate = new SimpleDateFormat("MM/dd/yyyy");
+	
 	private Date releaseDate;
 	private String name;
 	private String description;
 	private Date receiveDate;
 	private movieStatus status;
 	
+	// Made the constructor text file ready by requiring a String rather than a Date() which also expediting formatting.
 	movieObject(String movieReleaseDate, String movieName, String movieDescription, String movieReceiveDate) {
 		// Constructor to define everything.
+		
+		// Attempts to convert date() into MM/dd/yyyy format. Input format is important.
 		try {
 			releaseDate = goodDate.parse(movieReleaseDate);
 			receiveDate = goodDate.parse(movieReceiveDate);
@@ -21,11 +35,14 @@ public class movieObject {
 			e.printStackTrace();
 			
 		}
+		
 		name = movieName;
 		description = movieDescription;
 		
+		// Create current date to compare
 		Date currDate = new Date();
 		
+		// Date() comparisons allowing the movies status to be automatically set.
 		if (currDate.compareTo(receiveDate) < 0) {
 			
 			status = movieStatus.UNRECEIVED;
@@ -87,6 +104,7 @@ public class movieObject {
 	public String toString() {
 		// Printing of the object in clean format.
 		String movie;
+		// After being parsed during our objects instantiation our date is ready to be presented thanks SimpleDateFormat.
 		movie = "Release Date: " + goodDate.format(releaseDate);
 		movie += "\nName: " + name;
 		movie += "\nDescription: " + description;
