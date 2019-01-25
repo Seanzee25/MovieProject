@@ -4,7 +4,7 @@ import java.util.Date;
 
 /*******************************************
 ** Based on code from Thomas Hopkins fork **
-********************************************
+*******************************************/
 
 public class movieObject {
 	
