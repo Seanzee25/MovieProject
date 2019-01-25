@@ -10,3 +10,6 @@ Keep code clean and readable. Don't sacrifice readablity for complexity or effic
 ## TODO
 
 Working on enumeration today --James
+
+Enum and movieObject is looking good get ready to work on using data from text files (the date format is "MM/dd/yyyy")
+be very careful with formatting if you choose to take this task on --James 01/25/2019
