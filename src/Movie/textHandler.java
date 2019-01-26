@@ -55,7 +55,7 @@ public class textHandler {
 				for (indexTracker = 0; indexTracker < lineReader.length(); indexTracker++) {
 					
 					// While we have not hit the custom escape key set for each variable in text file
-					while (lineReader.charAt(indexTracker) != '|') {
+					while (lineReader.charAt(indexTracker) != ',') {
 						
 						title += lineReader.charAt(indexTracker);
 						
@@ -64,10 +64,10 @@ public class textHandler {
 					}
 					
 					// Force the iterator past the escape character
-					indexTracker++;
+					indexTracker += 2;
 					
 					// While we have not hit the custom escape key set for each variable in text file
-					while (lineReader.charAt(indexTracker) != '|') {
+					while (lineReader.charAt(indexTracker) != ',') {
 						
 						description += lineReader.charAt(indexTracker);
 						
@@ -76,10 +76,10 @@ public class textHandler {
 					}
 					
 					// Force the iterator past the escape character
-					indexTracker++;
+					indexTracker += 2;
 					
 					// While we have not hit the custom escape key set for each variable in text file
-					while (lineReader.charAt(indexTracker) != '|') {
+					while (lineReader.charAt(indexTracker) != ',') {
 						
 						releaseDate += lineReader.charAt(indexTracker);
 						
@@ -88,10 +88,10 @@ public class textHandler {
 					}
 					
 					// Force the iterator past the escape character
-					indexTracker++;
+					indexTracker += 2;
 					
 					// While we have not hit the custom escape key set for each variable in text file
-					while (lineReader.charAt(indexTracker) != '|') {
+					while (lineReader.charAt(indexTracker) != ',') {
 						
 						receiveDate += lineReader.charAt(indexTracker);
 						
@@ -142,6 +142,7 @@ public class textHandler {
 		String description = "";
 		String releaseDate = "";
 		String receiveDate = "";
+		String status = "";
 		
 		// "Iterator"
 		int indexTracker;
@@ -159,8 +160,9 @@ public class textHandler {
             	description = moviesToSave.get(indexTracker).getDescription();
             	releaseDate = moviesToSave.get(indexTracker).getGoodReleaseDate();
             	receiveDate = moviesToSave.get(indexTracker).getGoodReceiveDate();
+		status = moviesToSave.get(indexTracker).getStatus();
             	
-            	bufferedWriter.write(title + "|" + description + "|" + releaseDate + "|" + receiveDate + "|");
+            	bufferedWriter.write(title + ", " + description + ", " + releaseDate + ", " + receiveDate + ", " + status);
             	bufferedWriter.newLine();
             
             }
