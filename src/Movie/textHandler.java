@@ -160,7 +160,7 @@ public class textHandler {
             	description = moviesToSave.get(indexTracker).getDescription();
             	releaseDate = moviesToSave.get(indexTracker).getGoodReleaseDate();
             	receiveDate = moviesToSave.get(indexTracker).getGoodReceiveDate();
-		status = moviesToSave.get(indexTracker).getStatus();
+            	status = moviesToSave.get(indexTracker).getStatus().toString();
             	
             	bufferedWriter.write(title + ", " + description + ", " + releaseDate + ", " + receiveDate + ", " + status);
             	bufferedWriter.newLine();
