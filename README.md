@@ -9,9 +9,24 @@ Keep code clean and readable. Don't sacrifice readablity for complexity or effic
 
 ## TODO
 
-Working on enumeration today --James
+Menu currently handles inputting an int that does not represent a menu option.
+However, it doesn't handle the user entering something other than a number, so we should handle this.
+Also, test various amounts of input to ensure that the program handles input correctly and doesn't crash.
 
-Enum and movieObject is looking good get ready to work on using data from text files (the date format is "MM/dd/yyyy")
-be very careful with formatting if you choose to take this task on --James 01/25/2019
+Various error handling needs to be implemented as outlined in the instructors specifications for the project.
 
-Writing and saving to a text file has been implemented! --James 01/25/2019
+Adding a new movie(to the coming list):
+Invalid dates.
+Release date < receive date.
+Movie already in list.
+
+Start showing movies with given release date:
+The movie doesn't exist. (This should be handled already, I believe.)
+Movie already exists in showing list.
+Invalid release date.
+
+Edit a movie:
+Movie does not exists(I believe this should be handled already)
+
+Count the number of coming movies with release date earlier than input:
+Invalid release date.
