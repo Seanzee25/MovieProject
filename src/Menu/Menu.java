@@ -57,6 +57,7 @@ public class Menu {
         input.nextLine();
     }
     
+    // Switch statement telling which script to run based on user input.
     public int executeMenuOption(int option) throws IOException {
         switch(option) {
         case 1:
