@@ -57,7 +57,19 @@ public class Menu {
         input.nextLine();
     }
     
-    // Switch statement telling which script to run based on user input.
+    /***************************************************************
+     *                                                             *
+     * 	exectuteMenuOption                                         *
+     *                                                             *  
+     *  Tells the application which script to run based on the     *
+     *  users numeric input.                                       *                                                                        
+     *                                                             *
+     *  @param int option which is the users desired menu choice.  *
+     *  @return int 0 which will tell the program to stop.         *
+     *                                                             *
+     *                                                             *
+     ***************************************************************/
+    
     public int executeMenuOption(int option) throws IOException {
         switch(option) {
         case 1:
