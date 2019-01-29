@@ -58,6 +58,22 @@ public class Movie implements Comparable<Movie>{
         this.status = status;
     }
     
+    public Movie(Date release, String title, String descrip, Date receive) {
+    	releaseDate = release;
+    	name = title;
+    	description = descrip;
+    	receiveDate = receive;
+    	
+    	Date currDate = new Date();
+    	
+    	if (currDate.compareTo(release) >= 0) {
+    		status = MovieStatus.release;
+    	} else {
+    		status = MovieStatus.received;
+    	}
+    	
+    }
+    
     @Override
     /**
      * Outputs String formatted as "name, releaseDate, description, receiveDate, status"
@@ -118,8 +134,10 @@ public class Movie implements Comparable<Movie>{
         // a Date. 
         return new GregorianCalendar(year, month, day).getTime();
     }
+    
     @Override
     public int compareTo(Movie o) {
         return releaseDate.compareTo(o.releaseDate);
     }
+    
 }
