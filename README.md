@@ -27,14 +27,3 @@ Movie does not exists(I believe this should be handled already)
 
 Nicer output for displayMovies()
 
-!***********
-            Fix the saveData()
-            just using 
-                printWriter.print(showingList);
-                printWriter.print(comingList);
-                printWriter.flush();
-            Doesn't seem to save
-            at least for adding
-            new movies to the
-            coming list.
-           ***********!
