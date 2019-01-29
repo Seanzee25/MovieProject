@@ -1,6 +1,7 @@
 package Menu;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.ListIterator;
@@ -10,9 +11,11 @@ import Files.FileHandler;
 import Movie.Movie;
 import Movie.MovieStatus;
 import MovieList.MovieList;
+import ErrorHandling.InputErrors;
 
 public class Menu {
     boolean running;
+    SimpleDateFormat prettyDate = new SimpleDateFormat("MM/dd/yyyy");
     MovieList comingList;
     MovieList showingList;
     FileHandler fileHandler;
@@ -204,15 +207,17 @@ public class Menu {
     }
     
     private void editReleaseDate(Movie movie) {
-        String date;
+        String prettyDateString;
         Date newDate;
         
         System.out.println("Enter a new release date for the movie " + movie.getName() + "\n"
                             + "Format: mm/dd/yyyy");
-        date = input.nextLine();
-        newDate = Movie.parseDate(date);
+
+        newDate = InputErrors.dateHandling(input);
+        prettyDateString = prettyDate.format(newDate);
+        
         movie.setReleaseDate(newDate);
-        System.out.println("Release date changed to " + date);
+        System.out.println("Release date changed to " + prettyDateString);
         System.out.println("Re-sorting list...");
         comingList.sort(null);
     }
@@ -254,5 +259,5 @@ public class Menu {
     private void exit() {
         running = false;
     }
-
+    
 }
