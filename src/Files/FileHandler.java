@@ -24,7 +24,7 @@ public class FileHandler {
      * @throws IOException 
      */
     public void loadData(MovieList showingList, MovieList comingList) throws IOException {
-        FileInputStream fileInput = new FileInputStream("testInput.txt");
+        FileInputStream fileInput = new FileInputStream("saveFile.txt");
         Scanner input = new Scanner(fileInput);
         
         // Break down the file by line, then load the data for the Movie object through the loadFromString method.
@@ -66,7 +66,7 @@ public class FileHandler {
      * @throws IOException
      */
     public void saveData(MovieList showingList, MovieList comingList) throws IOException {
-        FileOutputStream fileOutput = new FileOutputStream("testOutput.txt");
+        FileOutputStream fileOutput = new FileOutputStream("saveFile.txt");
         PrintWriter printWriter = new PrintWriter(fileOutput);
         
         printWriter.print(showingList);
