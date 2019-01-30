@@ -238,14 +238,25 @@ public class Menu {
     
     private void editReleaseDate(Movie movie) {
         String prettyDateString;
-        Date newDate;
+        Date newDate = null;
+        boolean dateComparison = false;
+        Date receiveDate = movie.getReceiveDate();
         
-        System.out.println("Enter a new release date for the movie " + movie.getName() + "\n"
-                            + "Format: mm/dd/yyyy");
-
-        newDate = dateHandling(input);
+        while(dateComparison == false) {
+            System.out.println("Enter a new release date for the movie " + movie.getName() + "\n"
+                    + "Format: mm/dd/yyyy");
+            newDate = dateHandling(input);
+            
+            if (newDate.compareTo(receiveDate) <= 0) {
+                
+                System.out.println("Release date must be greater than the receive date. Try again.");
+                
+            } else {
+                dateComparison = true;
+            }
+        }
+        
         prettyDateString = prettyDate.format(newDate);
-        
         movie.setReleaseDate(newDate);
         System.out.println("Release date changed to " + prettyDateString);
         System.out.println("Re-sorting list...");
