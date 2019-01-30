@@ -283,7 +283,9 @@ public class Menu {
     }
     
     private void saveChanges(FileHandler fileHandler) throws IOException {
+        System.out.println("Saving...");
         fileHandler.saveData(showingList, comingList);
+        System.out.println("File saved.");
     }
     
     private Date prettyCurrentDate(Date currentDate) {
