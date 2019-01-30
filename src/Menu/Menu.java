@@ -109,9 +109,11 @@ public class Menu {
     
     private void displayMovies() {
         System.out.println("Showing Movies:");
-        System.out.print(showingList);
+        showingList.toPrettyString();
+        System.out.println();
         System.out.println("Coming Movies:");
-        System.out.print(comingList);
+        comingList.toPrettyString();
+        System.out.println();
     }
     
     private void addMovieToComingList() {    	
