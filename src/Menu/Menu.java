@@ -114,36 +114,53 @@ public class Menu {
         System.out.print(comingList);
     }
     
-    private void addMovieToComingList() {
+    private void addMovieToComingList() {    	
+    	Iterator<Movie> it = comingList.iterator();
+    	Movie curMovie;
         Movie movie;
         String title;
-        String descrip;
+        String descrip = "";
         Date release = new Date();
         Date receive = new Date();
+        boolean nameMatch = false;
         boolean dateComparison = false;
         
         System.out.println("Enter the title of the movie: ");
         title = input.nextLine();
         
-        System.out.printf("Enter the description for %s: %n", title);
-        descrip = input.nextLine();
+        while( it.hasNext()) {
+        	curMovie = it.next();
+            if(curMovie.getName().equalsIgnoreCase(title)) {
+                nameMatch = true;
+                break;
+            }
+        }
+        		
+        if(nameMatch == true) {
+        			
+        	System.out.println("The movie already exists in the coming list.");
+        			
+        } else {
+        		
+        	System.out.printf("Enter the description for %s: %n", title);
+            descrip = input.nextLine();
+                
+            System.out.printf("Enter the recieve date for %s: %n", title);
+            receive = dateHandling(input);
         
-        while(dateComparison == false) {
-        
-        	System.out.printf("Enter the recieve date for %s: %n", title);
-        	receive = dateHandling(input);
-        
-        	System.out.printf("Enter the release date for %s: %n", title);
+            System.out.printf("Enter the release date for %s: %n", title);
         	release = dateHandling(input);
         	
-        	if (release.compareTo(receive) <= 0) {
+        	while(dateComparison == false) {
         		
-        		System.out.println("Release date must be greater than the receive date. Try again.");
+        		if (release.compareTo(receive) <= 0) {
         		
-        	} else {
-        		dateComparison = true;
-        	}
-        	
+        			System.out.println("Release date must be greater than the receive date. Try again.");
+        		
+        		} else {
+        			dateComparison = true;
+        		}
+        	}	
         }
          
         System.out.println("Creating Movie...");
@@ -158,6 +175,7 @@ public class Menu {
         Date currDate = new Date();
         Date date;
         Movie curMovie;
+        boolean foundMatch = false;
         
         System.out.println("Enter date in this format: mm/dd/yyyy");
         date = dateHandling(input);
@@ -172,7 +190,12 @@ public class Menu {
                 curMovie.setStatus(MovieStatus.release);
                 showingList.add(curMovie);
                 it.remove();
+                foundMatch = true;
             }
+        }
+        
+        if(foundMatch == false ) {
+        	System.out.println("No match found or the film is already showing.");
         }
     }
     
