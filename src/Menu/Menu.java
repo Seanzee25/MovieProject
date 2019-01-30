@@ -51,9 +51,14 @@ public class Menu {
     }
     
     public int getUserInput() {
-        int userInput = input.nextInt();
-        input.nextLine();
-        return userInput;
+        if(input.hasNextInt()) {
+            int userInput = input.nextInt();
+            input.nextLine();
+            return userInput;
+        } else {
+            return -1;
+        }
+        
     }
     
     public void promptNext() {

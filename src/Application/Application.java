@@ -24,13 +24,7 @@ public class Application {
         // Main loop
         while(menu.isRunning()) {
             menu.displayMenu();
-            while (userInput > 7 && userInput < 1) {
-            	try {
-            		userInput = menu.getUserInput();
-            	} catch (Exception e){
-            		
-            	}
-            }
+            userInput = menu.getUserInput();
             exitVar = menu.executeMenuOption(userInput);
             
             if(exitVar != 1) {
