@@ -27,3 +27,4 @@ Movie does not exists(I believe this should be handled already)
 
 Nicer output for displayMovies()
 
+testing merges vis eclipse git
