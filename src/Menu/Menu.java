@@ -1,6 +1,8 @@
 package Menu;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.ListIterator;
@@ -13,6 +15,7 @@ import MovieList.MovieList;
 
 public class Menu {
     boolean running;
+    SimpleDateFormat prettyDate = new SimpleDateFormat("MM/dd/yyyy");
     MovieList comingList;
     MovieList showingList;
     FileHandler fileHandler;
@@ -108,14 +111,38 @@ public class Menu {
     
     private void addMovieToComingList() {
         Movie movie;
-        String line;
+        String title;
+        String descrip;
+        Date release = new Date();
+        Date receive = new Date();
+        boolean dateComparison = false;
         
-        System.out.println("Enter movie details in this format: name, releaseDate, description, receiveDate\n"
-                + "Dates are formatted mm/dd/yyyy");
-        line = input.nextLine();
-        movie = new Movie();
+        System.out.println("Enter the title of the movie: ");
+        title = input.nextLine();
+        
+        System.out.printf("Enter the description for %s: %n", title);
+        descrip = input.nextLine();
+        
+        while(dateComparison == false) {
+        
+        	System.out.printf("Enter the recieve date for %s: %n", title);
+        	receive = dateHandling(input);
+        
+        	System.out.printf("Enter the release date for %s: %n", title);
+        	release = dateHandling(input);
+        	
+        	if (release.compareTo(receive) <= 0) {
+        		
+        		System.out.println("Release date must be greater than the receive date. Try again.");
+        		
+        	} else {
+        		dateComparison = true;
+        	}
+        	
+        }
+         
         System.out.println("Creating Movie...");
-        movie.loadFromString(line);
+        movie = new Movie(release, title, descrip, receive);
         System.out.println("Adding to list...");
         comingList.addOrderedByReleaseDate(movie);
         System.out.println("Movie added");
@@ -123,22 +150,23 @@ public class Menu {
     
     private void startShowingByReleaseDate() {
         ListIterator<Movie> it = comingList.listIterator();
-        String line;
+        Date currDate = new Date();
         Date date;
         Movie curMovie;
         
         System.out.println("Enter date in this format: mm/dd/yyyy");
-        line = input.nextLine();
-        date = Movie.parseDate(line);
+        date = dateHandling(input);
         
         System.out.println("Checking coming movies...");
         while(it.hasNext()) {
             curMovie = it.next();
             if(curMovie.getReleaseDate().equals(date)) {
                 System.out.println(String.format("%s set to release and moved from coming list.", curMovie.getName()));
-                it.remove();
+                currDate = prettyCurrentDate(currDate);
+                curMovie.setReleaseDate(currDate);
                 curMovie.setStatus(MovieStatus.release);
                 showingList.add(curMovie);
+                it.remove();
             }
         }
     }
@@ -204,15 +232,17 @@ public class Menu {
     }
     
     private void editReleaseDate(Movie movie) {
-        String date;
+        String prettyDateString;
         Date newDate;
         
         System.out.println("Enter a new release date for the movie " + movie.getName() + "\n"
                             + "Format: mm/dd/yyyy");
-        date = input.nextLine();
-        newDate = Movie.parseDate(date);
+
+        newDate = dateHandling(input);
+        prettyDateString = prettyDate.format(newDate);
+        
         movie.setReleaseDate(newDate);
-        System.out.println("Release date changed to " + date);
+        System.out.println("Release date changed to " + prettyDateString);
         System.out.println("Re-sorting list...");
         comingList.sort(null);
     }
@@ -230,12 +260,12 @@ public class Menu {
         int count = 0;
         Iterator<Movie> it = comingList.iterator();
         Movie curMovie;
-        String date;
         Date parsedDate;
+        String prettyDateString;
         
         System.out.println("Enter release date formatted as mm/dd/yyyy.");
-        date = input.nextLine();
-        parsedDate = Movie.parseDate(date);
+        parsedDate = dateHandling(input);
+        prettyDateString = prettyDate.format(parsedDate);
         
         System.out.println("Counting movies...");
         while(it.hasNext()) {
@@ -244,15 +274,54 @@ public class Menu {
                 count++;
             }
         }
-        System.out.println("Found " + count + " coming movies with release dates before " + date + ".");
+        System.out.println("Found " + count + " coming movies with release dates before " + prettyDateString + ".");
     }
     
     private void saveChanges(FileHandler fileHandler) throws IOException {
         fileHandler.saveData(showingList, comingList);
     }
     
+    private Date prettyCurrentDate(Date currentDate) {
+    	
+    	String prettyDateString;
+    	
+    	try {
+        	prettyDateString = prettyDate.format(currentDate);
+			currentDate = prettyDate.parse(prettyDateString);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+		return currentDate;
+    	
+    }
+    
+    public static Date dateHandling(Scanner userInput) {
+    	String date;
+        Date newDate;
+        
+        try {
+        
+        	date = userInput.nextLine();
+        	newDate = Movie.parseDate(date);
+    	
+        	return newDate;
+        	
+        } catch (Exception e) {
+        	
+        	System.out.print("Your input does not follow mm/dd/yyyy \nFor example 12/13/2018 \nPlease try again...\n\n"
+        			+ "Please enter the date in mm/dd/yyyy format (ex: 12/13/1993)\n");
+        	
+        	return dateHandling(userInput);
+        	
+        }
+
+    }
+    
     private void exit() {
         running = false;
     }
-
+    
 }
