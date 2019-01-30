@@ -11,4 +11,6 @@ Keep code clean and readable. Don't sacrifice readablity for complexity or effic
 
 Test various amounts of input to ensure that the program handles input correctly and doesn't crash.
 
-Various error handling needs to be implemented as outlined in the instructors specifications for the project.
+Optimize and comment out code.
+
+Work on team report.
