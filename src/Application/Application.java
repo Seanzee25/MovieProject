@@ -15,7 +15,7 @@ public class Application {
         
         Menu menu = new Menu(comingList, showingList, fileHandler);
         
-        int userInput; // Users input at the menu
+        int userInput =8; // Users input at the menu
         int exitVar; // Value for declaring end of program - returned by menu.executeMenuOption()
         
         // Load initial data
@@ -24,7 +24,13 @@ public class Application {
         // Main loop
         while(menu.isRunning()) {
             menu.displayMenu();
-            userInput = menu.getUserInput();
+            while (userInput > 7 && userInput < 1) {
+            	try {
+            		userInput = menu.getUserInput();
+            	} catch (Exception e){
+            		
+            	}
+            }
             exitVar = menu.executeMenuOption(userInput);
             
             if(exitVar != 1) {
