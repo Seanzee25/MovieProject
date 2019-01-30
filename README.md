@@ -17,5 +17,3 @@ Adding a new movie(to the coming list):
 Movie already in list.
 
 Nicer output for displayMovies()
-
-Comment our work and team report.
