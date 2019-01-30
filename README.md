@@ -26,3 +26,4 @@ Edit a movie:
 Movie does not exists(I believe this should be handled already)
 
 Nicer output for displayMovies()
+
