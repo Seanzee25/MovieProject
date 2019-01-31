@@ -53,19 +53,24 @@ public class MovieList extends ArrayList<Movie> {
     }
     
     public void toPrettyString() {
-        Iterator<Movie> it = iterator();
-        Movie currMovie;
-        while(it.hasNext()) {
-            currMovie = it.next();
+    	if (isEmpty()) {
+    	    System.out.print("\nNo movies were found.")
+    	}
+    	else {
+            Iterator<Movie> it = iterator();
+            Movie currMovie;
+            while(it.hasNext()) {
+                currMovie = it.next();
+                
+                System.out.printf("\nTitle: %s%nDescription: %s%nReceive Date: %s%nRelease Date: %s\n",
+            	    	currMovie.getName(), 
+            	    	currMovie.getDescription(), 
+            	    	toPrettyDateString(currMovie.getReceiveDate()), 
+            	    	toPrettyDateString(currMovie.getReleaseDate()));
+                
             
-            System.out.printf("\nTitle: %s%nDescription: %s%nReceive Date: %s%nRelease Date: %s\n",
-            		currMovie.getName(), 
-            		currMovie.getDescription(), 
-            		toPrettyDateString(currMovie.getReceiveDate()), 
-            		toPrettyDateString(currMovie.getReleaseDate()));
-            
-            
-        }
+            }
+    	}
     }
     
     public String toPrettyDateString(Date date) {
