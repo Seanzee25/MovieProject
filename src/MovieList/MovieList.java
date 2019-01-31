@@ -1,6 +1,8 @@
 package MovieList;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.ListIterator;
 
@@ -48,5 +50,28 @@ public class MovieList extends ArrayList<Movie> {
             stringBuilder.append(it.next() + "\n");
         }
         return stringBuilder.toString();
+    }
+    
+    public void toPrettyString() {
+        Iterator<Movie> it = iterator();
+        Movie currMovie;
+        while(it.hasNext()) {
+            currMovie = it.next();
+            
+            System.out.printf("\nTitle: %s%nDescription: %s%nReceive Date: %s%nRelease Date: %s\n",
+            		currMovie.getName(), 
+            		currMovie.getDescription(), 
+            		toPrettyDateString(currMovie.getReceiveDate()), 
+            		toPrettyDateString(currMovie.getReleaseDate()));
+            
+            
+        }
+    }
+    
+    public String toPrettyDateString(Date date) {
+    	SimpleDateFormat prettyDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+    	String prettyDateString = prettyDateFormat.format(date);
+    	
+    	return prettyDateString;
     }
 }

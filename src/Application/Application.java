@@ -15,7 +15,7 @@ public class Application {
         
         Menu menu = new Menu(comingList, showingList, fileHandler);
         
-        int userInput; // Users input at the menu
+        int userInput =8; // Users input at the menu
         int exitVar; // Value for declaring end of program - returned by menu.executeMenuOption()
         
         // Load initial data
