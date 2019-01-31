@@ -242,7 +242,7 @@ public class Menu {
             curMovie = it.next();
             if(curMovie.getReleaseDate().compareTo(parsedDate) < 0) {
                 count++;
-            }
+            }qweqweqweqwe
         }
         System.out.println("Found " + count + " coming movies with release dates before " + date + ".");
     }

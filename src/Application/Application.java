@@ -20,7 +20,7 @@ public class Application {
         
         // Load initial data
         fileHandler.loadData(showingList, comingList);
-        
+        powierpowierpowier
         // Main loop
         while(menu.isRunning()) {
             menu.displayMenu();
