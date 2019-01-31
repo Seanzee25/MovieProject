@@ -13,4 +13,3 @@ Test various amounts of input to ensure that the program handles input correctly
 
 Optimize and comment out code.
 
-Work on team report.
