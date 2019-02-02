@@ -28,6 +28,7 @@ public class Application {
             exitVar = menu.executeMenuOption(userInput);
             
             if(exitVar != 1) {
+            	// If not exit condition
                 System.out.println("Press enter to continue.");
                 menu.promptNext();
             } else {

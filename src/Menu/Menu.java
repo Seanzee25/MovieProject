@@ -24,6 +24,7 @@ public class Menu {
     public boolean isRunning() { return running; }
     
     public Menu() {
+    	// Default constructor no params
         running = true;
         comingList = new MovieList();
         showingList = new MovieList();
@@ -32,6 +33,7 @@ public class Menu {
     }
     
     public Menu(MovieList _comingList, MovieList _showingList, FileHandler _fileHandler) {
+    	// Constructor which takes in params
         running = true;
         comingList = _comingList;
         showingList = _showingList;
@@ -40,6 +42,7 @@ public class Menu {
     }
     
     public void displayMenu() {
+    	// Display for all Menu options
         System.out.println("Choose an option: \n"
                 + "1) Display all movies. \n"
                 + "2) Add a new movie. \n"
@@ -51,6 +54,7 @@ public class Menu {
     }
     
     public int getUserInput() {
+    	// Called when asking for user's numerical choice from the Menu
         if(input.hasNextInt()) {
             int userInput = input.nextInt();
             input.nextLine();
@@ -108,6 +112,7 @@ public class Menu {
     }
     
     private void displayMovies() {
+    	// Display the movies to console 
         System.out.println("Showing Movies:");
         showingList.toPrettyString();
         System.out.println();
@@ -116,7 +121,8 @@ public class Menu {
         System.out.println();
     }
     
-    private void addMovieToComingList() {    	
+    private void addMovieToComingList() {
+    	// Series of prompts asking for user to enter a new Movie into the system
     	Iterator<Movie> it = comingList.iterator();
     	Movie curMovie;
         Movie movie;
@@ -130,6 +136,7 @@ public class Menu {
         System.out.println("Enter the title of the movie: ");
         title = input.nextLine();
         
+        // Looking for if movie name already exists.
         while( it.hasNext()) {
         	curMovie = it.next();
             if(curMovie.getName().equalsIgnoreCase(title)) {
@@ -137,10 +144,11 @@ public class Menu {
                 break;
             }
         }
-        		
+        
         if(nameMatch == true) {
         			
         	System.out.println("The movie already exists in the coming list.");
+        	return;
         			
         } else {
         	
