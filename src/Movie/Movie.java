@@ -4,6 +4,13 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.regex.Pattern;
 
+/** 
+ * Movie object represents a movie with all of its data: Name, Description, 
+ * Release and Receive Dates, as well as its status.
+ * 
+ * Implements comparable for easy sorting in the MovieList class.
+ */
+
 public class Movie implements Comparable<Movie>{
     private Date releaseDate;
     private String name;

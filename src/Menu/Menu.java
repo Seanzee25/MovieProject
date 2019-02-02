@@ -14,12 +14,12 @@ import Movie.MovieStatus;
 import MovieList.MovieList;
 
 public class Menu {
-    boolean running;
-    SimpleDateFormat prettyDate = new SimpleDateFormat("MM/dd/yyyy");
-    MovieList comingList;
-    MovieList showingList;
-    FileHandler fileHandler;
-    Scanner input;
+    private boolean running;
+    private SimpleDateFormat prettyDate = new SimpleDateFormat("MM/dd/yyyy");
+    private MovieList comingList;
+    private MovieList showingList;
+    private FileHandler fileHandler;
+    private Scanner input;
     
     public boolean isRunning() { return running; }
     
@@ -145,16 +145,20 @@ public class Menu {
             }
         }
         
+        // If movie name exists return 
         if(nameMatch == true) {
         			
         	System.out.println("The movie already exists in the coming list.");
         	return;
-        			
+        
+        // Movie name is unique 
         } else {
         	
+        	// Enter a description
         	System.out.printf("Enter the description for %s: %n", title);
             descrip = input.nextLine();
         	
+            // Enter a loop for entering receive/release dates
         	while(dateComparison == false) {
                     
                 System.out.printf("Enter the recieve date for %s: %n", title);
@@ -163,17 +167,19 @@ public class Menu {
                 System.out.printf("Enter the release date for %s: %n", title);
             	release = dateHandling(input);
         		
+            	// Make sure release is greater than receive 
         		if (release.compareTo(receive) <= 0) {
         		
         			System.out.println("Release date must be greater than the receive date. Try again.");
         			
-        		
+        		// All good; condition for exiting loop
         		} else {
         			dateComparison = true;
         		}
         	}	
         }
-         
+        
+        // Create the movie
         System.out.println("Creating Movie...");
         movie = new Movie(release, title, descrip, receive);
         System.out.println("Adding to list...");
@@ -182,6 +188,7 @@ public class Menu {
     }
     
     private void startShowingByReleaseDate() {
+    	// Gets all movies that are releasing on a date
         ListIterator<Movie> it = comingList.listIterator();
         Date currDate = new Date();
         Date date;
@@ -211,6 +218,7 @@ public class Menu {
     }
     
     private void editMovie() {
+    	// Edits an entered movie
         Iterator<Movie> it = comingList.iterator();
         String name;
         Movie curMovie = null;
@@ -261,6 +269,7 @@ public class Menu {
     }
     
     private void editName(Movie movie) {
+    	// Edits movie name 
         String name;
         
         System.out.println("Enter new name for the movie " + movie.getName());
@@ -271,6 +280,7 @@ public class Menu {
     }
     
     private void editReleaseDate(Movie movie) {
+    	// Edits release date of movie
         String prettyDateString;
         Date newDate = null;
         boolean dateComparison = false;
@@ -298,6 +308,7 @@ public class Menu {
     }
 
     private void editDescription(Movie movie) {
+    	// Edits description of movie
         String description;
         
         System.out.println("Enter a new description for the movie " + movie.getName());
@@ -342,7 +353,6 @@ public class Menu {
 			currentDate = prettyDate.parse(prettyDateString);
 			
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	

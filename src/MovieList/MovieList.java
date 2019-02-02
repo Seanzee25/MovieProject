@@ -38,12 +38,9 @@ public class MovieList extends ArrayList<Movie> {
         add(movie); // Method only reaches here if item was greater than all items in list.
     }
     
-    /**
-     * Adds a movie to the list in an ordered(non-decreasing) position based on release date.
-     * @param movie Movie to add
-     */
     @Override
     public String toString() {
+    	// Returns the MovieList object as a string
         StringBuilder stringBuilder = new StringBuilder();
         Iterator<Movie> it = iterator();
         while(it.hasNext()) {
@@ -53,6 +50,7 @@ public class MovieList extends ArrayList<Movie> {
     }
     
     public void toPrettyString() {
+    	// Returns MovieList object in a nicely formated string
     	if (isEmpty()) {
     	    System.out.print("\nNo movies were found.");
     	}
@@ -74,6 +72,7 @@ public class MovieList extends ArrayList<Movie> {
     }
     
     public String toPrettyDateString(Date date) {
+    	// Returns date in MM/dd/yyy format
     	SimpleDateFormat prettyDateFormat = new SimpleDateFormat("MM/dd/yyyy");
     	String prettyDateString = prettyDateFormat.format(date);
     	
