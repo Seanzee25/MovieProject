@@ -54,7 +54,7 @@ public class MovieList extends ArrayList<Movie> {
     
     public void toPrettyString() {
     	if (isEmpty()) {
-    	    System.out.print("\nNo movies were found.")
+    	    System.out.print("\nNo movies were found.");
     	}
     	else {
             Iterator<Movie> it = iterator();

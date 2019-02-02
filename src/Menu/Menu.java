@@ -143,21 +143,22 @@ public class Menu {
         	System.out.println("The movie already exists in the coming list.");
         			
         } else {
-        		
+        	
         	System.out.printf("Enter the description for %s: %n", title);
             descrip = input.nextLine();
-                
-            System.out.printf("Enter the recieve date for %s: %n", title);
-            receive = dateHandling(input);
-        
-            System.out.printf("Enter the release date for %s: %n", title);
-        	release = dateHandling(input);
         	
         	while(dateComparison == false) {
+                    
+                System.out.printf("Enter the recieve date for %s: %n", title);
+                receive = dateHandling(input);
+            
+                System.out.printf("Enter the release date for %s: %n", title);
+            	release = dateHandling(input);
         		
         		if (release.compareTo(receive) <= 0) {
         		
         			System.out.println("Release date must be greater than the receive date. Try again.");
+        			
         		
         		} else {
         			dateComparison = true;
