@@ -13,7 +13,6 @@ import Movie.Movie;
  * and specified toString method to reflect our need for data output.
  * Also, as movieObjects implement comparable by release date, the entire list can be
  * sorted by calling .sort(null) on the MovieList.
- * @author Seanzee
  *
  */
 @SuppressWarnings("serial")
@@ -39,8 +38,10 @@ public class MovieList extends ArrayList<Movie> {
     }
     
     @Override
+    /**
+     * A String representation of the MovieList
+     */
     public String toString() {
-    	// Returns the MovieList object as a string
         StringBuilder stringBuilder = new StringBuilder();
         Iterator<Movie> it = iterator();
         while(it.hasNext()) {
@@ -49,8 +50,10 @@ public class MovieList extends ArrayList<Movie> {
         return stringBuilder.toString();
     }
     
+    /**
+     * Returns MovieList in a nicely formatted string.
+     */
     public void toPrettyString() {
-    	// Returns MovieList object in a nicely formated string
     	if (isEmpty()) {
     	    System.out.print("\nNo movies were found.");
     	}
@@ -71,8 +74,12 @@ public class MovieList extends ArrayList<Movie> {
     	}
     }
     
+    /**
+     * Returns date in mm/dd/yyyy format.
+     * @param date Date
+     * @return String
+     */
     public String toPrettyDateString(Date date) {
-    	// Returns date in MM/dd/yyy format
     	SimpleDateFormat prettyDateFormat = new SimpleDateFormat("MM/dd/yyyy");
     	String prettyDateString = prettyDateFormat.format(date);
     	
