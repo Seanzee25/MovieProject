@@ -60,7 +60,7 @@ public class Menu {
                 + "1) Display all movies. \n"
                 + "2) Add a new movie. \n"
                 + "3) Start showing with given release date. \n"
-                + "4) Edit a movie. \n"
+                + "4) Edit a coming movie. \n"
                 + "5) Number of movies released before given date. \n"
                 + "6) Save changes. \n"
                 + "7) Exit.");
