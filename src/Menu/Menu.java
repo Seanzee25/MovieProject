@@ -13,6 +13,10 @@ import Movie.Movie;
 import Movie.MovieStatus;
 import MovieList.MovieList;
 
+/**
+ * Menu interface to allow user to interact with
+ * the program and view/update/save data.
+ */
 public class Menu {
     private boolean running;
     private SimpleDateFormat prettyDate = new SimpleDateFormat("MM/dd/yyyy");
@@ -23,8 +27,10 @@ public class Menu {
     
     public boolean isRunning() { return running; }
     
+    /**
+     * Default constructor
+     */
     public Menu() {
-    	// Default constructor no params
         running = true;
         comingList = new MovieList();
         showingList = new MovieList();
@@ -32,8 +38,13 @@ public class Menu {
         input = new Scanner(System.in);
     }
     
+    /**
+     * Constructor
+     * @param _comingList MovieList reference to the list to store coming movies.
+     * @param _showingList MovieList reference to the list to store released movies
+     * @param _fileHandler FileHandler reference to the fileHandler created in Application for saving/loading data.
+     */
     public Menu(MovieList _comingList, MovieList _showingList, FileHandler _fileHandler) {
-    	// Constructor which takes in params
         running = true;
         comingList = _comingList;
         showingList = _showingList;
@@ -41,8 +52,10 @@ public class Menu {
         input = new Scanner(System.in);
     }
     
+    /**
+     * Text representation of the menu options for display to user.
+     */
     public void displayMenu() {
-    	// Display for all Menu options
         System.out.println("Choose an option: \n"
                 + "1) Display all movies. \n"
                 + "2) Add a new movie. \n"
@@ -53,8 +66,11 @@ public class Menu {
                 + "7) Exit.");
     }
     
+    /**
+     * Gets user input for execution of menu options
+     * @return Returns -1 if no int exists in user input
+     */
     public int getUserInput() {
-    	// Called when asking for user's numerical choice from the Menu
         if(input.hasNextInt()) {
             int userInput = input.nextInt();
             input.nextLine();
@@ -65,6 +81,10 @@ public class Menu {
         
     }
     
+    /**
+     * Simply gets the next line from user, in order to stall
+     * the application until the user hits enter.
+     */
     public void promptNext() {
         input.nextLine();
     }
@@ -77,7 +97,7 @@ public class Menu {
      *  users numeric input.                                       *                                                                        
      *                                                             *
      *  @param int option which is the users desired menu choice.  *
-     *  @return int 0 which will tell the program to stop.         *
+     *  @return int returns -1 to represent application end        *
      *                                                             *
      *                                                             *
      ***************************************************************/
@@ -111,8 +131,10 @@ public class Menu {
         return 0;
     }
     
+    /**
+     * Displays the coming and showing lists of movies to the user.
+     */
     private void displayMovies() {
-    	// Display the movies to console 
         System.out.println("Showing Movies:");
         showingList.toPrettyString();
         System.out.println();
@@ -121,8 +143,10 @@ public class Menu {
         System.out.println();
     }
     
+    /**
+     * Prompts user for appropriate data for adding a new movie to the comingList
+     */
     private void addMovieToComingList() {
-    	// Series of prompts asking for user to enter a new Movie into the system
     	Iterator<Movie> it = comingList.iterator();
     	Movie curMovie;
         Movie movie;
@@ -133,6 +157,7 @@ public class Menu {
         boolean nameMatch = false;
         boolean dateComparison = false;
         
+        // Get Name of movie from user
         System.out.println("Enter the title of the movie: ");
         title = input.nextLine();
         
@@ -187,6 +212,9 @@ public class Menu {
         System.out.println("Movie added");
     }
     
+    /**
+     * Prompts user for a date, and sets all movies with a releaseDate matching that date to a status of release.
+     */
     private void startShowingByReleaseDate() {
     	// Gets all movies that are releasing on a date
         ListIterator<Movie> it = comingList.listIterator();
@@ -195,13 +223,16 @@ public class Menu {
         Movie curMovie;
         boolean foundMatch = false;
         
+        // Get date from user
         System.out.println("Enter date in this format: mm/dd/yyyy");
         date = dateHandling(input);
         
+        // Iterate through list, comparing releaseDates to user entered date.
         System.out.println("Checking coming movies...");
         while(it.hasNext()) {
             curMovie = it.next();
             if(curMovie.getReleaseDate().equals(date)) {
+                // Changes status and move to showingList.
                 System.out.println(String.format("%s set to release and moved from coming list.", curMovie.getName()));
                 currDate = prettyCurrentDate(currDate);
                 curMovie.setReleaseDate(currDate);
@@ -217,17 +248,22 @@ public class Menu {
         }
     }
     
+    /**
+     * Prompts user for a name of an existing movie in the comingList,
+     * and allows user to change name, release date, or description
+     */
     private void editMovie() {
-    	// Edits an entered movie
         Iterator<Movie> it = comingList.iterator();
         String name;
         Movie curMovie = null;
         boolean found = false;
         int userInput;
         
+        // Get name from user
         System.out.println("Please enter the name of the movie to edit.");
         name = input.nextLine();
         
+        // Search for movie with matching name
         System.out.println("Searching for movie with name " + name);
         while(it.hasNext()) {
             curMovie = it.next();
@@ -237,6 +273,7 @@ public class Menu {
             }
         }
         
+        // If found, prompt for what data to update
         if(found && curMovie != null) {
             System.out.println("What would you like to edit? \n"
                     + "1) Name\n"
@@ -263,13 +300,17 @@ public class Menu {
             }
         }
         
+        // If not found, tell user.
         if(!found) {
             System.out.println("Movie with name " + name + " not found.");
         }
     }
     
+    /**
+     * Prompts user for a new name, and updates the movie
+     * @param movie The Movie to edit.
+     */
     private void editName(Movie movie) {
-    	// Edits movie name 
         String name;
         
         System.out.println("Enter new name for the movie " + movie.getName());
@@ -279,13 +320,17 @@ public class Menu {
         
     }
     
+    /**
+     * Prompts user for a new release date and updates the movie
+     * @param movie The Movie to edit.
+     */
     private void editReleaseDate(Movie movie) {
-    	// Edits release date of movie
         String prettyDateString;
         Date newDate = null;
         boolean dateComparison = false;
         Date receiveDate = movie.getReceiveDate();
         
+        // Prompts user for a date until the entered date is correctly formatted
         while(dateComparison == false) {
             System.out.println("Enter a new release date for the movie " + movie.getName() + "\n"
                     + "Format: mm/dd/yyyy");
@@ -300,6 +345,7 @@ public class Menu {
             }
         }
         
+        // Update the movies data
         prettyDateString = prettyDate.format(newDate);
         movie.setReleaseDate(newDate);
         System.out.println("Release date changed to " + prettyDateString);
@@ -307,6 +353,10 @@ public class Menu {
         comingList.sort(null);
     }
 
+    /**
+     * Prompts user for new description and updates the movie
+     * @param movie The Movie to edit
+     */
     private void editDescription(Movie movie) {
     	// Edits description of movie
         String description;
@@ -317,6 +367,9 @@ public class Menu {
         System.out.println("Description changed to " + description);
     }
     
+    /**
+     * Display the number of movies with a release date before a user entered date.
+     */
     private void displayNumberOfMoviesBeforeDate() {
         int count = 0;
         Iterator<Movie> it = comingList.iterator();
@@ -324,10 +377,12 @@ public class Menu {
         Date parsedDate;
         String prettyDateString;
         
+        // Get date from user.
         System.out.println("Enter release date formatted as mm/dd/yyyy.");
         parsedDate = dateHandling(input);
         prettyDateString = prettyDate.format(parsedDate);
         
+        // Iterate through list, generating a count
         System.out.println("Counting movies...");
         while(it.hasNext()) {
             curMovie = it.next();
@@ -335,15 +390,27 @@ public class Menu {
                 count++;
             }
         }
+        // Output result
         System.out.println("Found " + count + " coming movies with release dates before " + prettyDateString + ".");
     }
     
+    /**
+     * Saves the data stored in the coming and showing lists.
+     * Overwrites previously held data in the text file.
+     * @param fileHandler Reference to the FileHandler created in Application
+     * @throws IOException
+     */
     private void saveChanges(FileHandler fileHandler) throws IOException {
         System.out.println("Saving...");
         fileHandler.saveData(showingList, comingList);
         System.out.println("File saved.");
     }
     
+    /**
+     * Converts a Date object to a String easily viewable by the user.
+     * @param currentDate Date
+     * @return String
+     */
     private Date prettyCurrentDate(Date currentDate) {
     	
     	String prettyDateString;
@@ -360,6 +427,11 @@ public class Menu {
     	
     }
     
+    /**
+     * Validates the users input to ensure formatting of dates.
+     * @param userInput
+     * @return Date
+     */
     public static Date dateHandling(Scanner userInput) {
     	String date;
         Date newDate;
@@ -382,6 +454,9 @@ public class Menu {
 
     }
     
+    /**
+     * Sets running to false, ending the main loop in Application, ending the program.
+     */
     private void exit() {
         running = false;
     }
