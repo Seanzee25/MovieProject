@@ -49,6 +49,9 @@ public class Movie implements Comparable<Movie>{
         this.status = status;
     }
     
+    /**
+     * Default constructor
+     */
     public Movie() {
         releaseDate = new GregorianCalendar().getTime();
         name = "Undefined";
@@ -57,6 +60,14 @@ public class Movie implements Comparable<Movie>{
         status = MovieStatus.received;
     }
     
+    /**
+     * Constructor for initializing all attributes
+     * @param releaseDate Date
+     * @param name String
+     * @param description String
+     * @param receiveDate Date
+     * @param status Enum<MovieStatus> release, or received.
+     */
     public Movie(Date releaseDate, String name, String description, Date receiveDate, Enum<MovieStatus> status) {
         this.releaseDate = releaseDate;
         this.name = name;
@@ -65,6 +76,14 @@ public class Movie implements Comparable<Movie>{
         this.status = status;
     }
     
+    /**
+     * Constructor for initializing without a status.
+     * MovieStatus is set based on a current local date compared to the given release date.
+     * @param release Date
+     * @param title String
+     * @param descrip String
+     * @param receive Date
+     */
     public Movie(Date release, String title, String descrip, Date receive) {
     	releaseDate = release;
     	name = title;
@@ -142,6 +161,9 @@ public class Movie implements Comparable<Movie>{
         return new GregorianCalendar(year, month, day).getTime();
     }
     
+    /**
+     * Makes Movie objects comparable by releaseDate
+     */
     @Override
     public int compareTo(Movie o) {
         return releaseDate.compareTo(o.releaseDate);
