@@ -11,6 +11,9 @@ import Movie.Movie;
 import Movie.MovieStatus;
 import MovieList.MovieList;
 
+/**
+ * Handles loading and saving to files.
+ */
 public class FileHandler {
     
     public FileHandler() {
@@ -45,7 +48,7 @@ public class FileHandler {
             	movie.setStatus(MovieStatus.received);
         	}
         	
-            
+            // Add to correct list
             if(movie.getStatus() == MovieStatus.release) {
                 showingList.add(movie);
             } else { 
